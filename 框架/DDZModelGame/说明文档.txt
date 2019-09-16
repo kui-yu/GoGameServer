@@ -1,0 +1,128 @@
+1.现已调通流程
+2.客户端有逻辑，可以自行根据实际情况去去掉客户端逻辑
+3.所有的结构体命名都以G开头
+4.不是ext开头的不能修改
+5.所有的逻辑单线程。不可以使用go另起线程
+6.断线重连还没做，2-3天后加上
+
+//2019/3/4 11:59修改记录
+1.添加三个文件
+	a.pushHttpHandler.go这边注册http推送请求
+	b.pushMsg.go这边添加推送的具体处理
+	c.pushMsgDefine.go这边添加推送消息定义
+
+2.推送功能规范：
+	a.操作用户缓存数据记得加锁
+	b.推送消息定义,统一以PMsg开头
+
+3.斗地主已添加金币修改推送，用post调用http://10.0.0.221:8500/changcoin可实现推送给玩家
+具体有变动可自行修改
+
+4.只允许修改ext开的和新添加的这三个文件
+
+//2019/3/4  15:21修改记录
+1.增加ext_hall.go文件，提供给推送处理游服信息,格式：
+	Id   int32//协议id
+	Uid  int64//用户uid
+	Data []byte//具体的数据
+	
+//2019/3/4  19:06修改记录
+1.根据讨论删除ext_hall.go。不做游服通知大厅修改金币接口
+2.推送金币修改的时候，修改大厅缓存玩家金币，如果在游戏中
+	通知游服更改金币，再转发给客户端更新金币，如果不在游戏中
+	直接通过大厅通知玩家修改金币:
+	客户端收到的协议号：MSG_HALL_PUSH_CHANGECOIN //350001,修改用户金币推送
+3.desk中提供单个退出逻辑函数。func (this *Desk) LeaveByForce(p *ExtPlayer)，百人场判断玩家能否离开，能离开调用此函数
+4.游戏记录信息：只要协议号是这个MSG_GAME_END_RECORD，大厅直接做转发给数据库，结构体随便定义，如斗地主：
+type GGameRecord struct {
+	Id          int32             //协议号
+	GameId      int               `json:"gameId"`
+	GradeId     int               `json:"gradeId"`
+	RoomId      int               `json:"roomId"`
+	GameRoundNo string            `json:"gameRoundNo"`
+	UserRecord  []GGameRecordInfo `json:"userRecord"`
+}
+只要Id赋值MSG_GAME_END_RECORD，其他字段自己定义，json这个结构体传给数据库提供的接口
+
+//2019/3/5  19:06修改记录
+1.增加加入游戏公共消息，用于判断能否进入游戏：
+	MSG_HALL_JOIN_GMAE       //300005加入游戏
+	MSG_HALL_JOIN_GAME_REPLY //300006加入游戏应答
+	
+	type HMsgHallJoinGame struct {
+		Id        int32 //协议号
+		GameType  int32 //游戏类型
+		RoomType  int32 //房间类型
+		GradeType int32 //场次类型
+	}
+	type HMsgHallJoinGameReply struct {
+		Id     int32  //协议号
+		Result int32  //0成功，其余失败
+		Err    string //失败原因
+	}
+	
+	func GetGameDetailByWeb(roomtype, gradetype, gametype int32) (*DbGetGameServerData, error)//获取游戏服务器信息
+	
+2.登录大厅返回的数据增加三个字段：
+	UserName        string  //真实姓名
+	ForbiddenEnable bool    //用户冻结
+	FrozenEnable    bool    //用户禁用
+	
+3.因后台接口修改，对应修改接口地址
+
+//2019/3/6 增加春天的倍数
+
+//2019/3/6 框架更新，修改消息推送。
+   修改到框架文件 define.go desk.go mgrdesk.go，更新消息推送文件 pushHttpHandler.go pushMsg.go pushMsgDefine.go
+   func (this *Desk) UpdatePlayerInfo(p *ExtPlayer, d *DkInMsg) 方法需要对应的ExtDesk重写，防止写入冲突
+  
+   客户端监听消息： 350002(MSG_HALL_PUSH_CLIENT)
+
+//2019/03/10 用户信息添加是否绑定密码的字段:BindPassword,服务器不做处理，只做转发
+
+//2019/03/17
+1.玩家字段增加robot字段，表示是否机器人增加ext_hall
+2.因需求修改，所有金币加得分统一改成int64的。请相关服务端和客户端根据实际情况修改
+3.当前框架内，金币字段与实际金币的比值1:100，与现金比值1:10000
+
+//2019/03/18
+1.增加玩家主动更新金币的接口
+    协议号：MSG_HALL_GETNEWESTCOIN       //300007玩家获取最新的金币
+	       MSG_HALL_GETNEWESTCOIN_REPLY //300008玩家更新金币应答
+	结构体：type HMsgHallGetNewestCoin struct {
+	           Id int32
+           }
+			type HMsgHallGetNewestCoinReply struct {
+				Id     int32 //协议号
+				Result int32 //0成功，其他失败
+				Err    string
+				Coin   int64 //更新的金币数量
+			}
+2.匹配金币不足崩溃bug
+
+//2019/03/19 11.41
+1.增加机器人大厅登录和应答协议：
+	协议号：	MSG_HALL_ROBOT_LOGIN         = 300010 //机器人登录
+			MSG_HALL_ROBOT_LOGIN_REPLY   = 300011 //机器人登录应答
+	结构体：HMsgHallRobotLogin，HMsgHallRobotLoginReply
+2.修改更新金币的协议号
+	MSG_HALL_GETNEWESTCOIN       = 300008 //玩家获取最新的金币
+	MSG_HALL_GETNEWESTCOIN_REPLY = 300009 //玩家更新金币应答
+3.配置文件增加机器人获取的ip地址
+
+//2019/03/19 03.27
+1.修改玩家加入的排列，保证与chairid一致,desk.go中的AddPlayer
+2.修改游戏记不保存的bug,GGameEnd这个结构体增加ActiveUid字段， 赋值为桌子上随意一个玩家的uid
+  
+
+注意：MSG_GAME_END_NOTIFY这条消息必须在游戏自己定义的结算消息之前
+//2019/04/02 20:11
+1.增加抢登通知和心跳应答
+	MSG_HALL_OTHERLOGIN_NOTIFY   = 300016 //账号被抢登陆
+	MSG_HALL_HEART_REPLY         = 300017 //心跳应答
+	HMsgHallQiangDengNotify //抢登通知
+	HMsgHallHeartReply 心跳应答
+	
+2.修改游戏总记录和单个游戏记录的记录方式
+	用大厅的token来保存用户游戏信息
+	游戏结算保存记录的结构体不变，只是一次只是数组是一个，每个玩家自己保存
