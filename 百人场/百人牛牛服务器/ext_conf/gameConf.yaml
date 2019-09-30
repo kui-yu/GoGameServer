@@ -1,0 +1,68 @@
+# 定时器状态和时间
+timer:
+  #等待开始状态
+  waitstart_id: 10
+  waitstart_ms: 1000
+  #坐下的人下注
+  robseat_id: 11
+  robseat_ms: 1000
+  #洗牌状态
+  shufflecard_id: 16
+  shufflecard_ms: 1000
+  #发牌状态
+  facard_id: 12
+  facard_ms: 1000
+  #下注状态
+  downbets_id: 13
+  downbets_ms: 1000
+  #开牌状态
+  opencard_id: 14
+  opencard_ms: 1000
+  #结算状态
+  balance_id: 15
+  balance_ms: 1000
+
+# 几局未操作提示和退出
+undo:
+  warning: 3
+  exit: 5
+
+# 限制信息
+limitInfo:
+  # 筹码级别
+  bet_level_count: 5
+  #bet_levels: [1000000, 2000000, 5000000, 10000000, 20000000]
+  bet_levels: [10, 20, 50, 100, 200]
+  #座位数量
+  seat_count: 4
+  #坐下条件
+  seatdown_cond: 10000000
+  #坐下人发牌之前最低下注
+  seatdown_minbet: 1000000
+  #最低坐几次才能站起
+  seatdown_num: 5
+  # 排行显示数量
+  rank_count: 8
+  # 玩家列表数量
+  userlist_count: 20
+  # 玩家记录多少局输赢
+  userlist_record_count: 20
+  # 走势条数
+  runchart_count: 10
+  # 每个区域单玩家最大下注
+  area_maxcoin: 100000000
+  # 每个区域坐下玩家最大下注
+  area_maxcoin_downseat: 200000000
+  # 携带金币比押注倍数比例
+  comp_downbet_double: 5
+  # 是否包含大小王
+  exists_maxminking: true
+  # 座位玩家连续几局未下注，自动站起
+  seatdown_autoup_num: 3
+
+# 控制信息
+ctrlInfo:
+  #庄家赢概率
+  banker_win_probability: 85
+  #庄家输概率
+  banker_lose_probability: 60

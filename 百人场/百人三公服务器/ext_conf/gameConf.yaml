@@ -1,0 +1,17 @@
+#注意:冒号后有数据要空格否则解析失败
+#选择倍数时间
+double_timer: 5
+#开始下注
+start_timer: 2
+#下注时间
+bet_timer: 15
+#停止下注时间
+stop_bet_timer: 2
+#发牌时间
+send_card_timer: 5
+#亮牌时间
+open_timer: 8
+#结算时间
+settle_timer: 8
+#洗牌时间
+shuffle_timer: 3

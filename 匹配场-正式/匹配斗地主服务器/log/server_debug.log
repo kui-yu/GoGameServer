@@ -1,0 +1,190 @@
+2019/09/27 11:14:41 [conf.go:35][D] 网关配置文件初始化结束...%!(EXTRA main.Config={0 127.0.0.1 1 1 6 1 8500 1 3 http://10.0.0.148:8089 http://10.0.0.148:8088 http://10.0.0.222:8087})
+2019/09/27 11:14:41 [hall.go:72][D] 大厅初始化结束
+2019/09/27 11:14:41 [hall.go:74][D] 游服初始化结束
+2019/09/27 11:15:02 [mgrdesk.go:476][D] 获取游戏服务器信息失败%!(EXTRA *url.Error=Get http://10.0.0.148:8088/web/gameInfo/gameinfo?gradeId=6&gameId=1&roomId=1: dial tcp 10.0.0.148:8088: connectex: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。)
+2019/09/27 11:17:27 [conf.go:35][D] 网关配置文件初始化结束...%!(EXTRA main.Config={0 127.0.0.1 1 1 6 1 8500 1 3 http://10.0.0.88:8089 http://10.0.0.88:8088 http://10.0.0.222:8087})
+2019/09/27 11:17:27 [hall.go:72][D] 大厅初始化结束
+2019/09/27 11:17:27 [hall.go:74][D] 游服初始化结束
+2019/09/27 11:17:27 [mgrdesk.go:479][D] ...............1%!(EXTRA string={
+	"msg":"success",
+	"code":200,
+	"data":{
+		"game":[
+			{
+				"bscore":100,
+				"display":true,
+				"enable":true,
+				"gameConfig":{
+					"chipMax":5400,
+					"miniRate":0.5,
+					"robotWait":12,
+					"vipLimitRed":5,
+					"currentStock":2000,
+					"goalStock":1000,
+					"limitRedMax":450,
+					"tenChips":[1],
+					"chipMin":44,
+					"cumulativeStock":1200,
+					"initialStock":10000,
+					"intervalGameRate":[
+						{
+							"rate":0,
+							"intervalEnd":0,
+							"intervalStart":0
+						}
+					],
+					"profitValue":4,
+					"differentBetArea":[0,1,2,3],
+					"maxRobot":20
+				},
+				"gameId":1,
+				"gameName":"斗地主",
+				"gradeId":6,
+				"gradeName":"体验厅",
+				"id":130,
+				"limitHigh":999999999999,
+				"limitLower":0,
+				"maintenance":true,
+				"maxLines":0,
+				"maxTimes":100,
+				"onlineMax":500,
+				"onlineMin":300,
+				"rate":0.20,
+				"restrict":0,
+				"roomId":1,
+				"roomName":"匹配房间",
+				"sence":"ddz"
+			}
+		]
+	}
+})
+2019/09/27 11:17:27 [mgrdesk.go:488][D] 获取游戏服务器信息成功%!(EXTRA main.DbGetGameServerData={100 true true 1 斗地主 6 体验厅 130 999999999999 0 true 0 100 500 300 0.2 0 1 匹配房间 ddz {[{0 0 0}] 2000 10000 1000 0.5 20 12 5400 44 450 1200 [1] 4 5 [0 1 2 3]}})
+2019/09/27 11:17:27 [mgrdesk.go:514][D] 获取玩家层级胜率成功%!(EXTRA []main.DbHierarchyGameRate=[{-0.16 9} {-0.35 10} {-0.12 11} {-1 36} {0.8 38} {0.12 39} {0.12 40} {0.12 41} {0.12 42} {0.12 43} {0.12 44} {0.12 45} {0.12 46} {0.12 47} {0.12 48} {0.12 49}])
+2019/09/27 11:17:27 [main.go:19][D] 服务器运行开始
+2019/09/27 11:52:56 [conf.go:35][D] 网关配置文件初始化结束...%!(EXTRA main.Config={0 127.0.0.1 1 1 6 1 8500 1 3 http://10.0.0.88:8089 http://10.0.0.88:8088 http://10.0.0.222:8087})
+2019/09/27 11:52:56 [hall.go:72][D] 大厅初始化结束
+2019/09/27 11:52:56 [hall.go:74][D] 游服初始化结束
+2019/09/27 11:52:56 [mgrdesk.go:479][D] ...............1%!(EXTRA string={
+	"msg":"success",
+	"code":200,
+	"data":{
+		"game":[
+			{
+				"bscore":100,
+				"display":true,
+				"enable":true,
+				"gameConfig":{
+					"chipMax":5400,
+					"miniRate":0.5,
+					"robotWait":12,
+					"vipLimitRed":5,
+					"currentStock":2000,
+					"goalStock":1000,
+					"limitRedMax":450,
+					"tenChips":[1],
+					"chipMin":44,
+					"cumulativeStock":1200,
+					"initialStock":10000,
+					"intervalGameRate":[
+						{
+							"rate":0,
+							"intervalEnd":0,
+							"intervalStart":0
+						}
+					],
+					"profitValue":4,
+					"differentBetArea":[0,1,2,3],
+					"maxRobot":20
+				},
+				"gameId":1,
+				"gameName":"斗地主",
+				"gradeId":6,
+				"gradeName":"体验厅",
+				"id":130,
+				"limitHigh":999999999999,
+				"limitLower":0,
+				"maintenance":true,
+				"maxLines":0,
+				"maxTimes":100,
+				"onlineMax":500,
+				"onlineMin":300,
+				"rate":0.20,
+				"restrict":0,
+				"roomId":1,
+				"roomName":"匹配房间",
+				"sence":"ddz"
+			}
+		]
+	}
+})
+2019/09/27 11:52:56 [mgrdesk.go:488][D] 获取游戏服务器信息成功%!(EXTRA main.DbGetGameServerData={100 true true 1 斗地主 6 体验厅 130 999999999999 0 true 0 100 500 300 0.2 0 1 匹配房间 ddz {[{0 0 0}] 2000 10000 1000 0.5 20 12 5400 44 450 1200 [1] 4 5 [0 1 2 3]}})
+2019/09/27 11:52:56 [mgrdesk.go:514][D] 获取玩家层级胜率成功%!(EXTRA []main.DbHierarchyGameRate=[{-0.16 9} {-0.35 10} {-0.12 11} {-1 36} {0.8 38} {0.12 39} {0.12 40} {0.12 41} {0.12 42} {0.12 43} {0.12 44} {0.12 45} {0.12 46} {0.12 47} {0.12 48} {0.12 49}])
+2019/09/27 11:52:56 [main.go:19][D] 服务器运行开始
+2019/09/27 14:08:33 [conf.go:35][D] 网关配置文件初始化结束...%!(EXTRA main.Config={0 127.0.0.1 1 1 6 1 8500 1 3 http://10.0.0.88:8089 http://10.0.0.88:8088 http://10.0.0.222:8087})
+2019/09/27 14:08:33 [hall.go:72][D] 大厅初始化结束
+2019/09/27 14:08:33 [hall.go:74][D] 游服初始化结束
+2019/09/27 14:08:34 [mgrdesk.go:479][D] ...............1%!(EXTRA string={
+	"msg":"success",
+	"code":200,
+	"data":{
+		"game":[
+			{
+				"bscore":100,
+				"display":true,
+				"enable":true,
+				"gameConfig":{
+					"chipMax":5400,
+					"miniRate":0.5,
+					"robotWait":12,
+					"vipLimitRed":5,
+					"currentStock":2000,
+					"goalStock":1000,
+					"limitRedMax":450,
+					"tenChips":[1],
+					"chipMin":44,
+					"cumulativeStock":1200,
+					"initialStock":10000,
+					"intervalGameRate":[
+						{
+							"rate":0,
+							"intervalEnd":0,
+							"intervalStart":0
+						}
+					],
+					"profitValue":4,
+					"differentBetArea":[0,1,2,3],
+					"maxRobot":20
+				},
+				"gameId":1,
+				"gameName":"斗地主",
+				"gradeId":6,
+				"gradeName":"体验厅",
+				"id":130,
+				"limitHigh":999999999999,
+				"limitLower":0,
+				"maintenance":true,
+				"maxLines":0,
+				"maxTimes":100,
+				"onlineMax":500,
+				"onlineMin":300,
+				"rate":0.20,
+				"restrict":0,
+				"roomId":1,
+				"roomName":"匹配房间",
+				"sence":"ddz"
+			}
+		]
+	}
+})
+2019/09/27 14:08:34 [mgrdesk.go:488][D] 获取游戏服务器信息成功%!(EXTRA main.DbGetGameServerData={100 true true 1 斗地主 6 体验厅 130 999999999999 0 true 0 100 500 300 0.2 0 1 匹配房间 ddz {[{0 0 0}] 2000 10000 1000 0.5 20 12 5400 44 450 1200 [1] 4 5 [0 1 2 3]}})
+2019/09/27 14:08:34 [mgrdesk.go:514][D] 获取玩家层级胜率成功%!(EXTRA []main.DbHierarchyGameRate=[{-0.16 9} {-0.35 10} {-0.12 11} {-1 36} {0.8 38} {0.12 39} {0.12 40} {0.12 41} {0.12 42} {0.12 43} {0.12 44} {0.12 45} {0.12 46} {0.12 47} {0.12 48} {0.12 49}])
+2019/09/27 14:08:34 [main.go:19][D] 服务器运行开始
+2019/09/27 14:13:16 [sys_operator.go:123][D] 玩家排序%!(EXTRA []int=[1 0 2])
+2019/09/27 14:13:16 [run_state2_sendCard.go:39][D] 座位：%!(EXTRA int32=1, string=手牌, []uint8=[65 34 49 61 45 28 43 26 9 40 55 7 54 6 37 52 51])
+2019/09/27 14:13:16 [run_state2_sendCard.go:40][D] 小牌%!(EXTRA []uint8=[16 15 14 13 13 12 11 10 9 8 7 7 6 6 5 4 3])
+2019/09/27 14:13:16 [run_state2_sendCard.go:39][D] 座位：%!(EXTRA int32=0, string=手牌, []uint8=[18 33 17 1 29 13 44 58 42 56 24 8 39 38 21 35 3])
+2019/09/27 14:13:16 [run_state2_sendCard.go:40][D] 小牌%!(EXTRA []uint8=[15 14 14 14 13 13 12 10 10 8 8 8 7 6 5 3 3])
+2019/09/27 14:13:16 [run_state2_sendCard.go:39][D] 座位：%!(EXTRA int32=2, string=手牌, []uint8=[66 50 2 60 12 59 27 11 10 41 25 23 22 53 5 36 20])
+2019/09/27 14:13:16 [run_state2_sendCard.go:40][D] 小牌%!(EXTRA []uint8=[17 15 15 12 12 11 11 11 10 9 9 7 6 5 5 4 4])
+2019/09/27 14:13:16 [run_state2_sendCard.go:53][D] 底牌%!(EXTRA []uint8=[57 19 4])
+2019/09/27 14:13:16 [run_state2_sendCard.go:54][D] 小牌%!(EXTRA []uint8=[9 3 4])

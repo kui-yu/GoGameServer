@@ -1,0 +1,39 @@
+#限制信息
+limitinfo:
+  #下注区域数量
+  betcount: 12
+  #座位数量，即展示用户数量
+  chairnum: 6
+  #更多玩家显示数量
+  moreplayernum: 20
+  #显示历史记录局数
+  historynum: 10
+  #几局未下注提示
+  nobetwarning: 3
+  #几局未下注踢出
+  nobetremove: 5
+  #上庄金额:
+  upzhuangneed: 20000000
+  #几局后自动换庄:
+  changezhuangcount: 20
+  #上庄最多几人等待:
+  waitzhuangcount: 99
+#区域倍数
+areadouble:
+  #飞禽 走兽
+  feiqing: 2
+  zoushou: 2
+  #兔子 燕子
+  tuzi: 6
+  yanzi: 6
+  #鸽子 猴子 熊猫 孔雀
+  gezi: 8
+  houzi: 8
+  xiongmao: 8
+  kongque: 8
+  #狮子 老鹰
+  shizi: 12
+  laoying: 12
+  #鲨鱼  金鲨鱼
+  shayu: 24
+  jinshayu: 100

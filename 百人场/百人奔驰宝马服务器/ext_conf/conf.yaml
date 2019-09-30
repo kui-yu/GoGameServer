@@ -1,0 +1,28 @@
+# 状态信息
+stateInfo:
+  # 下注状态
+  downbet: 10
+  downbet_time: 15000
+  # 跑灯状态
+  runcarlogo: 11
+  runcarlogo_time: 10000
+  # 结算状态
+  balance: 12
+  balance_time: 5000
+# 限制信息
+limitInfo:
+  # 筹码级别
+  bet_level_count: 5
+  bet_levels: [1, 10, 50, 100, 500]
+  # 下注区域数
+  bet_count: 8
+  # 区域最大下注数
+  areamaxcoin: 200000
+  # 显示记录车标
+  logolimit: 8
+# 局数提示
+undo:
+  # x局未下注提示
+  warning: 3
+  # x局未下注踢出房间
+  exit: 5

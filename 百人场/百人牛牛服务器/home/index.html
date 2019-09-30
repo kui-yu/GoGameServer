@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+
+		<title>index</title>
+		<style>
+			h1 {
+				color: #010101;
+				font-size: 24px;
+				text-align: center;
+				font-weight: 300;
+			}
+			
+			.search-input {
+				box-sizing: border-box;
+				line-height: 20px;
+				font-size: 14px;
+				padding: 12px 22px;
+				padding-left: 40px;
+				width: 520px;
+				/*				background: #FFF url('https://static.fotor.com.cn/static/web/site/index/images/search_icon4877b95f52570b4764c48e88e78b0019.png') no-repeat 14px center;*/
+				color: #515865;
+				box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.1) inset;
+				border-radius: 4px 0 0 4px;
+				border: 1px solid rgba(146, 146, 146, 0.1);
+				transition: 0.3s all ease-out;
+			}
+			
+			.search span {
+				position: relative;
+			}
+			
+			.search span:after {
+				position: absolute;
+				content: "搜";
+				color: #CC9900;
+				left: 10px;
+				top: -5px;
+				font-size: 24px;
+				z-index: 2;
+			}
+			
+			.search {
+				text-align: center;
+			}
+			
+			a.search-btn {
+				border-radius: 0 4px 4px 0;
+				display: inline-block;
+				width: 80px;
+				line-height: 46px;
+				color: #FFF;
+				font-size: 16px;
+				background: #0b0e11;
+				text-align: center;
+				text-decoration: none;
+			}
+			
+			.head-top {
+				font-size: 60px;
+				color: #CC9900;
+				font-family: cursive;
+				margin-top: 20vh;
+			}
+			
+			h1 button {
+				line-height: 25px;
+				vertical-align: middle;
+				border: 1px solid #CC9900;
+				background-color: #CC9900;
+				color: #fff;
+				margin-left: 10px;
+				cursor: pointer;
+			}
+			
+			.online-pople {
+				position: fixed;
+				right: 15px;
+				top: 15px;
+				text-align: left;
+				box-shadow: 0 0 5px #ccc;
+				padding: 15px 25px;
+				border-radius: 3px;
+				background-color: #fff;
+				z-index: 3;
+			}
+			
+			.online-pople ul {
+				margin: 0;
+				padding: 0;
+			}
+			
+			.online-pople ul li {
+				list-style-type: none;
+				line-height: 30px;
+				font-size: 13px;
+				;
+			}
+			
+			.online-pople ul li span {
+				color: #CC9900;
+			}
+			
+			.online-pople ul li.refresh {
+				text-align: center;
+				margin-top: 10px;
+			}
+			
+			.online-pople ul li.refresh span {
+				background-color: #0b0e11;
+				color: #fff;
+				padding: 6px 15px;
+				cursor: pointer;
+				border-radius: 3px;
+			}
+			
+			.online-pople-panl {
+				position: relative;
+			}
+			
+			.online-pople-panl:after {
+				content: '';
+				position: absolute;
+				top: 0;
+				width: 0;
+				height: 0;
+			
+			}
+			
+			.online-pople-panl .online-closed {
+				position: absolute;
+				display: block;
+				left: -30px;
+				top: -20px;
+				width: 20px;
+				height: 20px;
+				line-height: 17px;
+				text-align: center;
+				box-shadow: 0 0 5px #ccc;
+				border-radius: 50%;
+				background-color: #fff;
+				cursor: pointer;
+			}
+			.online-table{
+				max-width: 1000px;
+				margin: auto;
+				margin-top: 20px;
+			}
+			.online-table table{
+				width: 100%;
+				text-align: center;
+				border-right: 1px solid #ccc;
+				border-top: 1px solid #ccc;
+				line-height: 30px;
+			}
+			.online-table table th,.online-table table td{
+				border-left: 1px solid #ccc;
+				border-bottom: 1px solid #ccc;
+			}
+			.card{
+				display: inline-block;
+				width: 40px;
+				height: 70px;
+				/*background-color: #999;*/
+				background-image: url('true.jpg');
+				background-size: 100%;
+				background-repeat: no-repeat;
+				background-position: center;
+				margin: 5px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="online-pople-click">
+			<!--<span style="font-size: 30px;">●</span>-->
+		</div>
+		<div class="online-pople">
+			<div class="online-pople-panl">
+				<!--<span class="online-closed">x</span>-->
+				<ul>
+					<li>在线用户数量：<span id="showOnlineNumber">100000</span>人</li>
+					<li>总桌子数量：<span id="showTotalDeskNumber">100000</span>人</li>
+					<li>已使用桌子数量：<span id="showUsedDeskNumber">100000</span>人</li>
+					<li>游戏缓存信息数量：<span id="showInMsgNumber">100000</span>人</li>
+					<li>大厅缓存信息数量：<span id="showOutMsgNumber">100000</span>人</li>
+					<li class="refresh"><span>刷新</span></li>
+				</ul>
+			</div>
+
+		</div>
+		<h1 class="head-top">AB棋牌：我的地盘，想踢就踢！</h1>
+		<div class="search">
+			<span><input class="search-input" placeholder="请输入对方用户名"></span><a class="std-btn black search-btn" href="javascript:" rel="nofollow" onclick="kickClick()">踢</a>
+		</div>
+		<div class="online-table">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<th>用户</th>
+					<th>卡牌</th>
+					<th>操作</th>
+				</tr>
+				<tr>
+					<td>Data</td>
+					<td>
+						<span class="card card1">&nbsp;</span>
+						<span class="card card2">&nbsp;</span>
+						<span class="card card3">&nbsp;</span>
+					</td>
+					<td><a href="">换牌</a></td>
+				</tr>
+			</table>
+		</div>
+	</body>
+	<script>
+		function kickClick() {
+
+		}
+
+		function getRequest() {
+			var ajax = new XMLHttpRequest();
+			//		ajax.open('get', 'getStar.php?starName=' + name);
+			ajax.open('get', 'http://127.0.0.1:8600/showOnlineNumber');
+			ajax.send();
+			ajax.onreadystatechange = function() {
+				if(ajax.readyState == 4 && ajax.status == 200) {
+					var online = document.getElementById('onlinePop')
+					online.innerHTML = JSON.parse(ajax.responseText)
+					console.log(JSON.parse(ajax.responseText)); //输入相应的内容			　　
+				}
+			}
+		}
+		getRequest()
+
+		function postRequest() {
+			var xhr = new XMLHttpRequest();
+			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xhr.open('post', '02.post.php');
+			xhr.send('name=fox&age=18');
+			xhr.onreadystatechange = function() {
+				if(xhr.readyState == 4 && xhr.status == 200) {
+					console.log(xhr.responseText);
+				}
+			};
+		}
+	</script>
+
+</html>

@@ -1,0 +1,222 @@
+//新需求
+1. 玩家第一次进房间，系统设置初始金额
+2. 玩家在游戏离开，强制弃牌再离开
+3. 钱输完了，发送给客户端设置金额，如果游戏开始了还没设置踢出玩家
+4. 断线重连所有玩家 OperateAuth没有
+5. 断线重连所有玩家当前状态 弃牌还是什么
+6. 结算阶段 时间太短 需要完成的功能有 玩家开牌（声音播放 一家一家开）胜负特效展示
+9.19
+7. 需要写测试接口，测试所有牌型判断是否正确
+
+
+# 前缀 N通知 Q请求 R回复
+
+#################常量定义和解析#################
+# 游戏状态
+const GameStatus(
+    GameStatusWaitStart = 10 + iota       // 等待开始游戏
+    GameStatusRandBank                    // 随机庄家，下盲注
+    GameStatusHoleCards                   // 发给玩家的两张牌
+    GameStatusFlopCards                   // 头三张公共牌
+    GameStatusTurnCards                   // 第四张公共牌
+    GameStatusRiverCards                  // 第五张公共牌
+    GameStatusUserOperate                 // 玩家操作
+    GameStatusResults                     // 结算
+)
+
+# 牌的类型 0x11=方块A
+const CardType(
+    Card_Fang = 0x10
+    Card_Mei  = 0x20
+    Card_Hong = 0x30
+    Card_Hei  = 0x40
+    Card_King = 0x50    // |14,15 小王，大王
+    Card_Invalid = 0xFF // 无效的牌
+)
+
+# 用户状态
+const UserState(
+    UserStateGameIn = 1+iota       //游戏中
+    UserStateWaitStart             //等待下一局开始
+    UserStateSettCoin              //设置携带金币
+)
+
+#操作权限解析
+const OperateAuth = 0x11111 //0x00001=弃牌 0x00010=加注 0x00100=跟注 0x01000=开牌 0x10000=梭哈 
+
+# 玩家信息
+struct UserInfo{
+    Uid: int64                             //玩家id
+    NickName: string                       //玩家昵称
+    Avatar: string                         //头像
+    Sid: int                               //玩家座位id 0开始
+    State: UserState                       //玩家状态
+    Coin: int64                            //玩家携带金币
+    Online: bool                           //是否在线
+}
+# 玩家扩展信息
+struct ExtUserInfo:UserInfo{
+    Cards:<int>[]                         //玩家手牌
+    IsBank:bool                           //是否是庄家
+    IsFold:bool                           //是否弃牌
+    IsAllIn:bool                          //是否已全下
+    DownCoins:int64                       //下注的金币
+    CurrStageOpt:int 					  //当前轮的操作
+}
+
+# 牌组合类型
+const CardGroupType{
+    CardGroupHighCard = 1 + iota          //高牌
+    CardGroupOnePair                      //一对
+    CardGroupTwoPair                      //两对
+    CardGroupThreeT                       //三条
+    CardGroupStraight                     //顺子
+    CardGroupFlush                        //同花
+    CardGroupFullhouse                    //三张+一对
+    CardGroupFourT                        //四条
+    CardGroupSFlush                       //同花顺
+    CardGroupRoyalFlush                   //皇家同花顺
+}
+
+#################消息定义#################
+# 通知游戏状态
+NGameStatus = 410001
+{
+    GameStatus: GameStatus                //游戏状态 
+    OverTime: int                         //结束时间
+}
+
+# 通知桌子信息
+NGameInfo = 410002
+{
+    JuHao: string                         //局号 #底层字段
+    DownBlind: int                        //底注
+    Users: <UserInfo>[]                   //玩家列表
+}
+
+# 玩家信息改变
+NGameUserChange = 410003
+{
+    ChangeType: int                       //类型 1新玩家加入 2玩家离开 3玩家信息改变  #玩家离线上线走底层消息
+    UserInfo:UserInfo                     //玩家信息
+}
+
+# 随机庄家
+NGameRandRank = 410004
+{
+    BankSid: int                          //随机庄家
+}
+
+# 盲注
+NGameBlind = 410005
+{
+    SmallBlind:{Sid:int, Coin:int}      //小盲
+    BigBlind:{Sid:int, Coin:int}        //大盲
+}
+
+# 发玩家的两张底牌
+NGameHoleCards = 410006
+{
+    Cards:[]int
+}
+
+# 发公共牌
+NGamePublicCards = 410007
+{
+    Type: int                           // 1=头三张 2=第四张 3=第五张
+    Cards:[]int
+}
+
+# 通知玩家操作
+NGameOperate = 410008
+{
+    Sid: int                            //座位id
+    OperateAuth:OperateAuth             //操作权限
+    MinCoin: int64                      //最低下注
+    MaxCoin: int64                      //最高下注
+}
+
+# 玩家请求操作
+QGameOperate = 410009
+{
+    OperateAuth:OperateAuth           //操作权限
+    RaiseValue:int                    //当权限=加注时，加注值
+}
+
+# 回复玩家请求操作
+RGameOperate = 410010
+{
+    Result:int                        //成功=0
+    Err:string
+}
+
+# 通知玩家操作结果
+NGameOperateResult = 410011
+{
+    Sid: int                          //座位id
+    OperateAuth:OperateAuth           //操作权限
+    RaiseValue:int                    //当权限=加注时，加注值
+}
+
+# 奖池变化
+NGameJackpotChange = 410012
+{
+    Sid: int64                          //用户id
+    ChangeVal: int64                    //改变的值
+    Value:int64                         //奖池新金额
+}
+
+# 结算
+NGameResult = 410013
+{
+    JackpotVal:int64                            //奖池金额
+    Results:[
+        {
+            Sid:int 
+            Uid:int
+            Value:int64
+            WaterProfit:float
+            Cards:int[]                    //最大牌集合
+            HandCards:int[]
+            CardGroupType:CardGroupType      //组合类型
+        }
+    ]
+}
+
+# 断线重连信息
+NGameReconnectInfo = 410014
+{
+    JuHao: string                         //局号 #底层字段
+    GameStatus: GameStatus                //游戏状态 
+    OverTime: int                         //结束时间
+    DownBlind: int                        //底注
+    JackpotVal:int64                      //奖池金额
+    PublicCards:<int>[]                   //公共牌集合
+    Users:<ExtUserInfo>[]                 //玩家集合
+}
+
+# 通知玩家设置携带金币
+NGameSetCoin = 410015
+{
+    MinCoin: int //最小
+    MaxCoin: int //最大
+}
+
+# 玩家设置携带金币
+QGameSetCoin = 410016
+{
+    Coin: int
+}
+
+# 回复玩家携带金币
+RGameSetCoin = 410017
+{
+    Err: ""
+    Coin: int
+}
+
+#桌子更新
+MSG_GAME_NDeskUpdate = 410018
+{
+    JuHao: string                         //局号 #底层字段
+}

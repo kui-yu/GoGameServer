@@ -1,0 +1,251 @@
+//游戏状态
+const GAME_STATUS(
+    GAME_STATUS_WAITSTART = 10 + iota // 等待开始 玩家可以请求坐下
+    GAME_STATUS_ROBSEAT               // 抢坐和坐下的人下注状态
+    GAME_STATUS_FACARD                // 发牌状态
+    GAME_STATUS_DOWNBTES              // 下注状态
+    GAME_STATUS_OPENCARD              // 开牌状态
+    GAME_STATUS_BALANCE               // 结算
+    GAME_STATUS_SHUFFLECARD           // 洗牌
+)
+
+const CardGroupType(
+    CardGroupType_Cattle_1 = 1
+    CardGroupType_Cattle_2
+    CardGroupType_Cattle_3
+    CardGroupType_Cattle_4
+    CardGroupType_Cattle_5
+    CardGroupType_Cattle_6
+    CardGroupType_Cattle_7
+    CardGroupType_Cattle_8
+    CardGroupType_Cattle_9
+    CardGroupType_Cattle_C
+	CardGroupType_Cattle_BOMB  // 炸弹 5倍
+	CardGroupType_Cattle_WUHUA // 五花牛 不包括10 6倍
+    CardGroupType_None
+    CardGroupType_NotCattle
+)
+
+// 请求游戏桌子信息
+MSG_GAME_QDESKINFO = 410018
+{
+}
+
+// 回复游戏桌子信息
+MSG_GAME_RDESKINFO = 410019
+{
+    Seats: [{ // 座位信息
+                Id           int    // 座位id
+                UserId       int64  // 用户id
+                Name         string // 名称
+                Avatar       string // 头像
+                DownBetTotal int32  // 总下注金额
+                SeatDownCount int    // 坐下的次数
+            }]
+    RankUsers: [{ // 展示用户
+                    UserId int64  // 用户Id
+                    Name   string // 名称
+                    Avatar string // 头像
+                }]
+    JuHao:string // 局号
+    FangHao:string // 房号
+    BetLevels:[int] // 下注级别
+    MyUserAvatar string           // 用户头像
+    MyUserName   string           // 用户昵称
+    MyUserCoin   int32            // 用户金币
+    MyDownBets:map[uint8]uint32 // 自己下注的集合
+    GameStatus: // 游戏状态
+    GameStatusDuration: // 当前状态持续时间毫秒
+    CardGroupArray: [ // 玩家和庄家的牌 庄家牌索引最后一个4
+        {
+            CardGroupType CardGroupType // 牛类型
+            MaxCard       uint8 // 最大牌
+            Cards         []uint8 // 牌集合
+        }
+    ]
+    SeatDownMinCoinCond: int // 坐下条件
+    SeatDownMinBetCond: int // 坐下的人最低下注
+    SeatUpTotalCount:    int // 站立条件
+}
+
+// 游戏状态改变
+MSG_GAME_NSTATUS_CHANGE  = 410001
+{
+    GameStatus:GAME_STATUS,
+    GameStatusDuration:int
+}
+
+// 玩家请求坐下
+MSG_GAME_QSEATDOWN = 410002
+{
+    SeatIdx:int
+}
+
+// 玩家请求坐下返回
+MSG_GAME_RSEATDOWN = 410003
+{
+    Result:int
+    Err:string
+}
+// 玩家请求站立
+MSG_GAME_QSEATUP = 410020
+{
+}
+
+// 玩家请求站立回复
+MSG_GAME_RSEATUP =  410021
+{
+	Id     int32
+	Result int32 //0成功，其他失败
+	Err    string
+}
+
+// 座位信息改变通知
+MSG_GAME_NSEATDOWN = 410004
+{
+    Type          int    // 0添加 1修改 2删除
+	SeatId        int    // 座位号
+	OldUserId     int64  // 玩家Id
+	NewUserId     int64  // 玩家Id
+	NewUserAvatar string // 玩家头像
+	NewUserName   string // 玩家昵称
+}
+
+// 玩家请求下注
+MSG_GAME_QDOWNBET = 410005
+{
+    SeatIdx:int
+    CoinIdx:int
+}
+
+// 玩家请求下注回复
+MSG_GAME_RDOWNBET = 410006
+{
+    Result:int  1:携带金币不足 2:座位不存在 3:已有玩家坐下
+    Err:string
+}
+
+// 玩家下注通知
+MSG_GAME_NDOWNBET = 410007
+{
+    Uid: int
+    SeatIdx:int
+    Coin:idx
+}
+
+// 系统发牌
+MSG_GAME_FACARD = 410008
+{
+    Cards:[
+            MaxCard:       0,
+            CardGroupType: CardGroupType_None,
+            Cards:         []uint8{cards[i], cards[i+1]}
+    ]
+}
+
+// 系统开牌
+MSG_GAME_OPENCARD = 410009
+{
+    Cards:[
+            MaxCard:       int,
+            CardGroupType: CardGroupType_None,
+            Cards:         []uint8{cards[i], cards[i+1]}
+    ]
+}
+
+// 结算
+MSG_GAME_BALANCE = 410010
+{
+    Result:[{
+        Bottom: int // 底
+        Result:int // 输赢多少 有负数
+        MyBottom: int
+        MyResult:int
+    }]
+    MyCoin: int
+}
+
+// 玩家提示信息
+MSG_GAME_TIPS = 410011
+{
+    Code:
+    Msg:
+}
+
+// 请求走势图
+MSG_GAME_QHISTORY = 410012
+{
+}
+
+// 请求走势回复
+MSG_GAME_RHISTORY = 410013
+{
+    Historys:[[CardGroupType,,],,]
+}
+
+// 请求更多玩家信息
+MSG_GAME_QMANYUSER = 410014
+{
+}
+// 请求更多玩家信息回复
+MSG_GAME_RMANYUSER = 410015
+{
+    ManyUsers:[{
+        Name:string,
+        Avatar:string,
+        Coin:int,
+        Gamecount:int
+        Victory:int,
+        Downbet:int
+    },...]
+}
+
+
+// 请求退出游戏
+MSG_GAME_QBACK = 410016
+{
+}
+
+// 请求退出游戏返回
+MSG_GAME_RBACK = 410017
+{
+	Id     int32
+	Result int32 //0成功，其他失败
+	Err    string
+}
+
+// 房间信息改变
+MSG_GAME_NDESKCHANGE = 410022
+{
+	JuHao:string // 局号
+}
+
+// 玩家排行列表
+MSG_GAME_NRANKLIST = 410023
+{
+	Data:[{
+		UserId int64  // 用户Id
+		Name   string // 名称
+		Avatar string // 头像
+	},...]
+}
+
+
+// 请求座位信息
+MSG_GAME_QSEATINFO = 410024 
+{
+	
+}
+
+// 请求座位信息可回复
+MSG_GAME_RSEATINFO = 410025
+{
+	Data:[{
+		Id           int    // 座位id
+        UserId       int64  // 用户id
+        Name         string // 名称
+        Avatar       string // 头像
+        DownBetTotal int32  // 总下注金额
+        SeatDownCount int    // 坐下的次数
+	}]
+}

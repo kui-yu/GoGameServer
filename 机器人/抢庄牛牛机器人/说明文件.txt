@@ -1,0 +1,30 @@
+//2019/04/04 14:16
+1.添加机器人模板
+2.说明：
+
+//此函数添加网络监听
+func (this *ExtRobotClient) AddHandler() {
+	//todo:0003此处添加游戏中的消息处理函数
+	this.Handle[MSG_HALL_ROBOT_LOGIN_REPLY] = this.onLogin
+	this.Handle[MSG_HALL_JOIN_GAME_REPLY] = this.onJoinGame
+	this.Handle[MSG_GAME_AUTO_REPLY] = this.onGameAuto
+}
+
+//此函数用于停止机器人
+func (this *ExtRobotClient) Stop() {
+	if this.IsRobotStop() {
+		return
+	}
+
+	this.RWMutex.Lock()
+	this.IsStop = true
+	defer this.RWMutex.Unlock()
+
+	this.BaseStop()
+	//todo:0002此处添加离开处理
+}
+
+//此函数为匹配成功或者失败
+func (this *ExtRobotClient) onGameAuto(d string) {
+	DebugLog("匹配房间消息结果", d)
+}

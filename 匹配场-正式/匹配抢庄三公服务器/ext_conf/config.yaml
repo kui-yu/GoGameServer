@@ -1,0 +1,23 @@
+#闲家下注倍数
+idle_multiple: [1,2,3,5,10]
+#最大倍数
+max_multiple: 35
+#抽水
+rate: 0.05
+#各阶段时间
+#匹配时间
+game_auto_timer: 15
+#开始
+stage_start_timer: 2
+#洗牌
+stage_shuffle_cards_timer: 3
+#发牌
+stage_send_cards_timer: 3
+#选庄
+stage_banker_multiple_timer: 10
+#下注
+stage_idle_multiple_timer: 10
+#开牌
+stage_open_cards_timer: 5
+#结算
+stage_game_settle_timer: 2

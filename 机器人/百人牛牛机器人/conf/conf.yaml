@@ -1,0 +1,68 @@
+---
+robotManager:
+  ip: 192.168.0.160
+  port: 9000
+rabbitClient:
+  host: 192.168.0.181
+  port: 5672
+  user: zxyy
+  pass: zxyy
+  queueName: robot
+gameServer:
+  backstageUrl: http://192.168.0.181:8090/
+  websocketUrl: 192.168.0.181:8090
+  urlPathLogin: V1.0/App/Login/login
+  isCustomHallConnect: true
+  hallIp: 192.168.0.250
+  hallPort: 8700
+  logPrint: true
+  errorPrint: true
+openWebInterface:
+  Ip: 192.168.0.250
+  Port: 9433
+  # 获得机器人配置url
+  getRobotConfigUrl: getrobotconfurl
+  # 提交机器人配置url
+  putRobotConfigUrl: putrobotconfurl
+  # 查询机器人是否在游戏中url
+  checkRobotUrl: checkroboturl
+  # 设置机器人游戏结束下线
+  offlineRobotUrl: offlineroboturl
+  # 设置机器人游戏强制下线
+  forceoffroboturl: forceoffroboturl
+  # 设置机器人游戏强制上线
+  forceonroboturl: forceonroboturl
+enterGame:
+  name: 百人牛牛高级场
+  gametype: 4
+  roomtype: 3
+  gradetype: 3
+robotConfig:
+- alias: 机器人的数量
+  name: num
+  value: 1
+  type: input
+- alias: 初始金额
+  name: initcoin
+  value: 20000
+  type: input
+- alias: 每局押注次数
+  name: downbetnum
+  value: 3
+  type: input
+- alias: 保留空座位数量
+  name: minemptyseat
+  value: 2
+  type: input
+- alias: 多少秒之后机器人开始坐下
+  name: minsecondseat
+  value: 2
+  type: input
+- alias: 金额少于*替换机器人
+  name: shiftRobotCoinMin
+  value: 5000
+  type: input
+- alias: 金额大于*替换机器人
+  name: shiftRobotCoinMax
+  value: 30000
+  type: input

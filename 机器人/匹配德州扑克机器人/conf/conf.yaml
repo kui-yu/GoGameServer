@@ -1,0 +1,52 @@
+---
+robotManager:
+  ip: 192.168.0.250
+  port: 9000
+rabbitClient:
+  host: 192.168.0.181
+  port: 5672
+  user: zxyy
+  pass: zxyy
+  queueName: robot
+gameServer:
+  backstageUrl: http://192.168.0.181:8090/
+  websocketUrl: 192.168.0.181:8090
+  urlPathLogin: V1.0/App/Login/login
+  isCustomHallConnect: true
+  hallIp: 192.168.0.250
+  hallPort: 8500
+  logPrint: true
+  errorPrint: true
+openWebInterface:
+  Ip: 192.168.0.250
+  Port: 9433
+  # 获得机器人配置url
+  getRobotConfigUrl: getrobotconfurl
+  # 提交机器人配置url
+  putRobotConfigUrl: putrobotconfurl
+  # 查询机器人是否在游戏中url
+  checkRobotUrl: checkroboturl
+  # 设置机器人游戏结束下线
+  offlineRobotUrl: offlineroboturl
+  # 设置机器人游戏强制下线
+  forceoffroboturl: forceoffroboturl
+  # 设置机器人游戏强制上线
+  forceonroboturl: forceonroboturl
+enterGame:
+  name: 德州扑克
+  gametype: 16
+  roomtype: 1
+  gradetype: 1
+robotConfig:
+- alias: 机器人的数量
+  name: num
+  value: 4
+  type: input
+- alias: 最小金额
+  name: mincoin
+  value: 20
+  type: input
+- alias: 最大金额
+  name: maxcoin
+  value: 40
+  type: input

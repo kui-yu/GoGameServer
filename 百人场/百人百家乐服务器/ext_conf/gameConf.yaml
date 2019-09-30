@@ -1,0 +1,75 @@
+# 区域倍率
+# 闲、庄、和、小、大、闲对、庄对、上庄赢、上庄输
+double: [2, 1.95, 9, 2.5, 1.5, 12, 12, 1.97, 1.97]
+
+# 下注限制和房间限制
+limitInfo:
+  limit:
+    # 初级
+    - low: 5000
+      high: 200000
+    # 中级
+    - low: 200000
+      high: 20000000
+    # 高级
+    - low: 1000000
+      high: 100000000
+    # 初级
+    - low: 5000
+      high: 200000
+    # 初级
+    - low: 5000
+      high: 200000
+    # 初级
+    - low: 5000
+      high: 200000
+
+  betCoins: 
+    # 初级
+    - bet: [5000, 10000, 20000, 50000, 100000]
+    # 中级
+    - bet: [200000, 500000, 1000000, 2000000, 5000000]
+    # 高级
+    - bet: [1000000, 2000000, 5000000, 10000000, 20000000]
+    # 初级
+    - bet: [5000, 10000, 20000, 50000, 100000]
+    # 初级
+    - bet: [5000, 10000, 20000, 50000, 100000]
+    # 初级
+    - bet: [5000, 10000, 20000, 50000, 100000]
+    
+# 为操作提示和退出
+undo:
+  warning: 3
+  exit: 5
+
+# 桌子配置
+# win 为0，表示随机不控制。其他则为收益率控制
+deskInfo:
+  seatCount: 8
+  listCount: 20
+  runChartCount: 20
+  betLimit: 30
+  win: 20
+  
+# 定时器状态和时间
+timer:
+  shuffle: 1
+  shuffleNum: 3 # 洗牌时间
+  ready: 2
+  readyNum: 3 # 准备时间
+  sendCard: 3
+  sendCardNum: 3 # 发牌时间
+  bet: 4
+  betNum: 20 # 下注时间
+  stopBet: 5
+  stopBetNum: 4 # 停止下注时间
+  open: 6
+  openNum: 4 # 开牌时间
+  addNum: 4 # 补牌一张时间
+  award: 7
+  awardNum: 8 # 派奖时间
+  over: 8
+  overNum: 8 # 重新回到洗牌时间
+  newBet: 9
+  newBetNum: 1 # 新下注广播

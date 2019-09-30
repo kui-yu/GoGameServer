@@ -1,0 +1,51 @@
+# 定时器状态和时间
+timer:
+  #随机庄家
+  randbank_ms: 3000
+  #发给玩家的两张牌
+  holecards_ms: 5000
+  #发公共牌
+  publiccard_ms: 3000
+  #玩家操作
+  useroperate_ms: 10000
+  #游戏结束时间
+  gameover_ms: 10000
+  
+#限制
+limitInfo:
+  -
+    id: 1
+    smallBlind: 10
+    bigBlind: 20
+    robotNum: 8
+    defSettCoin: 1000
+    userSettCoinMin: 200
+    userSettCoinMax: 2000
+    stageDownBet: [50, 100, 200, 300]
+  -
+    id: 2 
+    smallBlind: 20
+    bigBlind: 40
+    robotNum: 8
+    defSettCoin: 2000
+    userSettCoinMin: 200
+    userSettCoinMax: 5000
+    stageDownBet: [100, 200, 400, 600]
+  -
+    id: 3
+    smallBlind: 40
+    bigBlind: 80
+    robotNum: 8
+    defSettCoin: 5000
+    userSettCoinMin: 200
+    userSettCoinMax: 10000
+    stageDownBet: [200, 400, 800, 1200]
+  -
+    id: 6
+    smallBlind: 10
+    bigBlind: 20
+    robotNum: 8
+    defSettCoin: 1000
+    userSettCoinMin: 200
+    userSettCoinMax: 5000
+    stageDownBet: [50, 100, 200, 300]

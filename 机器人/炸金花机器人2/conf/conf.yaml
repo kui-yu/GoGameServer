@@ -1,0 +1,67 @@
+# 机器人管理连接
+#机器人管理中心的地址和端口
+robotManager:
+  ip: 192.168.0.99
+  port: 9000
+# 归还机器人消息队列配置
+rabbitClient:
+  host: 192.168.0.181
+  port: 5672
+  user: zxyy
+  pass: zxyy
+  queueName: robot
+# 大厅信息
+gameServer:
+#这边设置成自己大厅地址与isCustomHallConnect配合开关
+gameServer:
+  backstageUrl: http://192.168.0.181:8090/
+  websocketUrl: 192.168.0.181:8090
+  urlPathLogin: V1.0/App/Login/login
+  isCustomHallConnect: true
+  hallIp: 192.168.0.99
+  hallPort: 8500
+  logPrint: true
+  errorPrint: true
+openWebInterface:
+  #获得机器人配置
+  # Ip: 85.208.56.186
+  Ip: 192.168.0.99
+  Port: 11103
+  # 获得机器人配置url
+  getRobotConfigUrl: getrobotconfurl
+  # 提交机器人配置url
+  putRobotConfigUrl: putrobotconfurl
+  # 查询机器人是否在游戏中url
+  checkRobotUrl: checkroboturl
+  # 设置机器人游戏结束下线
+  offlineRobotUrl: offlineroboturl
+  # 设置机器人游戏强制下线
+  forceoffroboturl: forceoffroboturl
+  # 设置机器人游戏强制上线
+  forceonroboturl: forceonroboturl
+
+# 进入的哪个游戏  
+enterGame:
+  name: 匹配:炸金花高级场
+  gametype: 8
+  roomtype: 1
+  gradetype: 6
+
+# 自己的默认配置信息
+# 自由配置，参照如下格式，代码中用getGameConfigInt与getGameConfigString获取
+robotConfig:
+  -
+    alias: 机器人的数量
+    name: num
+    value: 2
+    type: input
+  -
+    alias: 最小初始金额
+    name: initCoinMin
+    value: 20000
+    type: input
+  -
+    alias: 最大初始金额
+    name: initCoinMax
+    value: 30000
+    type: input

@@ -1,0 +1,63 @@
+limitInfo:
+  # 筹码级别
+  bet_level_count: 10
+  bet_levels: 
+     - bet: [100, 200, 300, 500, 1000,2000,5000,10000,20000,50000]
+     - bet: [100, 200, 300, 500, 1000,2000,5000,10000,20000,50000]
+     - bet: [100, 200, 300, 500, 1000,2000,5000,10000,20000,50000]
+     - bet: [100, 200, 300, 500, 1000,2000,5000,10000,20000,50000]
+     - bet: [100, 200, 300, 500, 1000,2000,5000,10000,20000,50000]
+     - bet: [100, 200, 300, 500, 1000,2000,5000,10000,20000,50000]       
+  # 下注区域数
+  bet_count: 4
+  # 区域最大下注数
+  areamaxcoin:
+     - max: 500000
+     - max: 800000
+     - max: 2500000
+     - max: 500000
+     - max: 500000
+     - max: 500000
+     - max: 500000
+  #座位数量，即展示用户数量
+  seatcount: 6
+  #显示区域走势局数
+  qzoushicount: 24
+  #显示庄家走势局数
+  zzoushicount: 9
+  #玩家列表显示数量:
+  userlist_count: 20
+  #玩家记录多少局输赢
+  userlist_record_count: 20
+  #几局未下注提示
+  nobetwarning: 3
+  #几局未下注踢出
+  nobetremove: 5
+  #携带金币与押注倍数比例
+  downbet_coins_comp: 5
+#定时器状态和时间
+timer:
+#准备状态
+  # ready_id: 10
+  # ready_ms: 3000
+  #洗牌状态
+  startdownbets_id: 11
+  startdownbets_ms: 2
+  #下注状态
+  downbets_id: 12
+  downbets_ms: 15
+  #停止下注
+  stopdownbets_id: 13
+  stopdownbets_ms: 1
+  #发牌状态
+  facard_id: 14
+  facard_ms: 7
+  #开牌状态
+  opencard_id: 15
+  opencard_ms: 10
+  # #比牌状态
+  # thencard_id: 14
+  # thencard_ms: 5000
+  #结算状态
+  balance_id: 16
+  balance_ms: 8

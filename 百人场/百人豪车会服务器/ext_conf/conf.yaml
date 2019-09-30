@@ -1,0 +1,61 @@
+# 状态信息
+stateInfo:
+  # 下注状态
+  downbet: 10
+  downbet_time: 15000
+  # 跑灯状态
+  runcarlogo: 11
+  runcarlogo_time: 10000
+  # 结算状态
+  balance: 12
+  balance_time: 5000
+  #广播状态
+  bromsg:  13
+  bromsg_time:  1
+  # 准备状态
+  ready: 14
+  ready_time: 2000
+# 限制信息
+limitInfo:
+  # 筹码级别
+  bet_level_count: 5
+  bet_levels: 
+     - bet: [100, 1000, 5000, 10000, 100000]
+     - bet: [1000, 5000, 10000, 50000, 100000]
+     - bet: [5000, 10000, 50000, 100000, 500000]
+     - bet: [100, 1000, 5000, 10000, 100000]
+     - bet: [100, 1000, 5000, 10000, 100000]
+     - bet: [100, 1000, 5000, 10000, 100000]       
+  # 下注区域数
+  bet_count: 8
+  # 区域最大下注数
+  areamaxcoin:
+     - max: 500000
+     - max: 800000
+     - max: 2500000
+     - max: 500000
+     - max: 500000
+     - max: 500000
+     - max: 500000
+  # 显示记录车标
+  logolimit: 8
+  # 更多玩家请求人数限制
+  playerlist: 20
+# 局数提示
+undo:
+  # x局未下注提示
+  warning: 3
+  # x局未下注踢出房间
+  exit: 5
+
+# 各种车辆倍数
+multiple: 
+  porsche: 15
+  benz: 10
+  ferrari: 20
+  maserati: 30
+  min_Porsche: 4
+  min_Benz: 4
+  min_Ferrari: 4
+  min_Maserati: 4
+  

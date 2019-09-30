@@ -1,0 +1,18 @@
+1.配置文件
+	a.除了robotConfig需要修改，其余的直接赋值， 
+	robotConfig的num为机器人数量，必须配置，其余的根据自身配置,
+	代码中用getGameConfigInt与getGameConfigString获取
+	b.显示类型type: input,label,hide
+	
+2.接入
+	a.ExtRobotClient实现这个类，用于实现桌子消息处理
+	b.实现ext_controller.go中onRobotIdle函数处理。添加删除机器人
+	
+3.文件说明
+	a.robot_server.go用于与机器人管理中心连接，并且处理机器人管理中心的请求
+	b.robot_client.go用于连接大厅，进入玩游戏
+	c.time_ticker.go定时器
+	d.controller.go用于处理机器人管理中心的请求，robot_server.go这个只是接收消息，具体处理在这里
+	e.push_http_handler.go处理后台的请求
+4.机器人金币
+	a.每个机器人有金币字段 robot_client: Coin int64 游服返回机器人信息和金币变化时需要修改该字段，用于还机器人参数，后台做统计
